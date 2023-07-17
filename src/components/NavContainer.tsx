@@ -5,15 +5,14 @@ import ProfileMenu from "./ProfileMenu";
 import LargeNavMenu from "./LargeNavMenu";
 import SmallNavMenu from "./SmallNavMenu";
 
-const pages = ["Sign In with Google", "Sign In"];
-
 interface Display {
   user: boolean;
+  setUser: React.Dispatch<React.SetStateAction<boolean>>;
   xs: string;
   md: string;
   gap: string;
 }
-const NavContainer = ({ user, xs, md, gap }: Display) => {
+const NavContainer = ({ user, setUser, xs, md, gap }: Display) => {
   return (
     <>
       <Box
@@ -28,9 +27,9 @@ const NavContainer = ({ user, xs, md, gap }: Display) => {
         {user ? (
           <ProfileMenu />
         ) : xs === "flex" ? (
-          <SmallNavMenu pages={pages} />
+          <SmallNavMenu setUser={setUser} />
         ) : (
-          <LargeNavMenu pages={pages} />
+          <LargeNavMenu setUser={setUser} />
         )}
         <Logo xs={xs} md={md} />
       </Box>

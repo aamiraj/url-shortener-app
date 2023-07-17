@@ -5,7 +5,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 
-const SmallNavMenu = ({ pages }: any) => {
+interface Properties {
+  setUser: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const SmallNavMenu = ({ setUser }: Properties) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -15,6 +18,9 @@ const SmallNavMenu = ({ pages }: any) => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const handleOnClick = () => {
+    setUser(true);
   };
   return (
     <>
@@ -47,13 +53,21 @@ const SmallNavMenu = ({ pages }: any) => {
           display: { xs: "block", md: "none" },
         }}
       >
-        {pages.map((page: any) => (
-          <MenuItem key={page} onClick={handleCloseNavMenu}>
-            <Typography color="primary" textAlign="center">
-              {page}
-            </Typography>
-          </MenuItem>
-        ))}
+        <MenuItem onClick={handleCloseNavMenu}>
+          <Typography color="primary" textAlign="center">
+            Sign In With Google
+          </Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleOnClick();
+            handleCloseNavMenu();
+          }}
+        >
+          <Typography color="primary" textAlign="center">
+            Sign In
+          </Typography>
+        </MenuItem>
       </Menu>
     </>
   );

@@ -2,7 +2,13 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-const LargeNavMenu = ({ pages }: any) => {
+interface Properties {
+  setUser: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const LargeNavMenu = ({ setUser }: Properties) => {
+  const handleOnClick = () => {
+    setUser(true);
+  };
   return (
     <>
       <Box
@@ -13,15 +19,19 @@ const LargeNavMenu = ({ pages }: any) => {
           order: 2,
         }}
       >
-        {pages.map((page: any) => (
-          <Button
-            key={page}
-            variant="contained"
-            sx={{ my: 2, color: "white", display: "block" }}
-          >
-            {page}
-          </Button>
-        ))}
+        <Button
+          variant="contained"
+          sx={{ my: 2, color: "white", display: "block" }}
+        >
+          Sign In With Google
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ my: 2, color: "white", display: "block" }}
+          onClick={handleOnClick}
+        >
+          Sign In
+        </Button>
       </Box>
     </>
   );

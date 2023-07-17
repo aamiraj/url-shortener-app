@@ -6,7 +6,7 @@ import "@fontsource/playfair-display";
 import NavContainer from "./NavContainer";
 
 function NavBar() {
-  const [user, setUser] = React.useState<boolean>(true);
+  const [user, setUser] = React.useState<boolean>(false);
 
   return (
     <AppBar
@@ -20,10 +20,22 @@ function NavBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Nav for large devices */}
-          <NavContainer user={user} xs="none" md="flex" gap="4rem" />
+          <NavContainer
+            user={user}
+            setUser={setUser}
+            xs="none"
+            md="flex"
+            gap="4rem"
+          />
 
           {/* Nav for medium and small devices */}
-          <NavContainer user={user} xs="flex" md="none" gap="2rem" />
+          <NavContainer
+            user={user}
+            setUser={setUser}
+            xs="flex"
+            md="none"
+            gap="2rem"
+          />
         </Toolbar>
       </Container>
     </AppBar>
