@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
 import Router from "./router/router";
+import { Container } from "@mui/material";
 
 function App() {
   return (
-    <div>
+    <Container sx={{ maxWidth: "1536px" }}>
       <Router />
-    </div>
+    </Container>
   );
 }
 
