@@ -10,6 +10,7 @@ const LargeNavMenu = ({ pages }: any) => {
           flexGrow: 0,
           display: { xs: "none", md: "flex" },
           gap: "2rem",
+          order: 2,
         }}
       >
         {pages.map((page: any) => (

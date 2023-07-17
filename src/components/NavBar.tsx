@@ -1,18 +1,12 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-import Logo from "./Logo";
-import ProfileMenu from "./ProfileMenu";
-import SmallNavMenu from "./SmallNavMenu";
-import LargeNavMenu from "./LargeNavMenu";
 import "@fontsource/playfair-display";
-
-const pages = ["Sign In with Google", "Sign In"];
+import NavContainer from "./NavContainer";
 
 function NavBar() {
-  const [user, setUser] = React.useState<Boolean>(false);
+  const [user, setUser] = React.useState<boolean>(true);
 
   return (
     <AppBar
@@ -25,32 +19,11 @@ function NavBar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo for large devices */}
-          <Logo xs="none" md="flex" />
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            {user ? <ProfileMenu /> : <SmallNavMenu pages={pages} />}
-            {/* Logo for medium and small devices */}
-            <Logo xs="flex" md="none" />
-          </Box>
+          {/* Nav for large devices */}
+          <NavContainer user={user} xs="none" md="flex" gap="4rem" />
 
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "flex-end",
-              alignItems: "center",
-              gap: "4rem",
-            }}
-          >
-            {user ? <ProfileMenu /> : <LargeNavMenu pages={pages} />}
-          </Box>
+          {/* Nav for medium and small devices */}
+          <NavContainer user={user} xs="flex" md="none" gap="2rem" />
         </Toolbar>
       </Container>
     </AppBar>
