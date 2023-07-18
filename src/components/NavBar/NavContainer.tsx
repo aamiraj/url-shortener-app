@@ -25,7 +25,7 @@ const NavContainer = ({ user, setUser, xs, md, gap }: Display) => {
         }}
       >
         {user ? (
-          <ProfileMenu />
+          <ProfileMenu setUser={setUser} />
         ) : xs === "flex" ? (
           <SmallNavMenu setUser={setUser} />
         ) : (

@@ -7,9 +7,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
 
-const settings = ["Profile", "Logout"];
+interface AppProps {
+  setUser: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const ProfileMenu = () => {
+const ProfileMenu = ({ setUser }: AppProps) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -19,6 +21,10 @@ const ProfileMenu = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleOnClick = () => {
+    setUser(false);
   };
   return (
     <>
@@ -44,11 +50,17 @@ const ProfileMenu = () => {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{setting}</Typography>
-            </MenuItem>
-          ))}
+          <MenuItem onClick={handleCloseUserMenu}>
+            <Typography textAlign="center">Profile</Typography>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleCloseUserMenu();
+              handleOnClick();
+            }}
+          >
+            <Typography textAlign="center">Log out</Typography>
+          </MenuItem>
         </Menu>
       </Box>
     </>

@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import Router from "./router/router";
 import { Container } from "@mui/material";
 
