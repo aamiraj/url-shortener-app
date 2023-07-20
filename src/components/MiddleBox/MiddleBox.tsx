@@ -1,12 +1,21 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ShortLinkInput from "./ShortLinkInput";
+import copy from "copy-to-clipboard";
 
 const MiddleBox = () => {
   const [copied, setCopied] = useState(false);
+  const [urlCopy, setUrlCopy] = useState("short/link/example");
+
   const handleClickCopyUrl = () => {
     setCopied(true);
+    copy(urlCopy);
   };
+
+  const handleChangeCopyUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUrlCopy(event.target.value);
+  };
+
   useEffect(() => {
     setTimeout(() => setCopied(false), 3000);
   });
@@ -40,9 +49,7 @@ const MiddleBox = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "secondary.main",
-            filter: "blur(8px)",
-            opacity: 0.5,
+            backgroundColor: "#fff",
           }}
         />
         <TextField
@@ -61,6 +68,8 @@ const MiddleBox = () => {
         <ShortLinkInput
           copied={copied}
           handleClickCopyUrl={handleClickCopyUrl}
+          urlCopy={urlCopy}
+          handleChangeCopyUrl={handleChangeCopyUrl}
         />
       </Box>
     </Container>

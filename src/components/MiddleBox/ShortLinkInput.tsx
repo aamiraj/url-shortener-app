@@ -12,9 +12,16 @@ import CheckIcon from "@mui/icons-material/Check";
 interface AppProps {
   copied: boolean;
   handleClickCopyUrl: () => void;
+  urlCopy: string;
+  handleChangeCopyUrl: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ShortLinkInput = ({ copied, handleClickCopyUrl }: AppProps) => {
+const ShortLinkInput = ({
+  copied,
+  handleClickCopyUrl,
+  urlCopy,
+  handleChangeCopyUrl,
+}: AppProps) => {
   return (
     <>
       <FormControl
@@ -30,7 +37,8 @@ const ShortLinkInput = ({ copied, handleClickCopyUrl }: AppProps) => {
           id="outlined-basic2"
           type="text"
           label="Your short link here"
-          value={`short/link/example`}
+          onChange={handleChangeCopyUrl}
+          value={urlCopy}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
