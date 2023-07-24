@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const shorten = async (url: string, email: string|null) => {
-  let endpoint =`http://localhost:5000/api/v1/short-url/shorten`;
+const shorten = async (url: string, email: string | null) => {
+  let endpoint = process.env.REACT_APP_SERVER_DEV + `/api/v1/short-url/shorten`;
   let linkRequest = {
     full: url,
     email: email,

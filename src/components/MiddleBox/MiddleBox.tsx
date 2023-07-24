@@ -18,9 +18,9 @@ const MiddleBox = () => {
     setUrlCopy(event.target.value);
   };
 
-  const handleGenerate = async() => {
+  const handleGenerate = async () => {
     const short = await shorten(url, null);
-    setUrlCopy(`http://localhost:5000/${short}`)
+    setUrlCopy(process.env.REACT_APP_SERVER_DEV + "/" + short);
   };
 
   useEffect(() => {
