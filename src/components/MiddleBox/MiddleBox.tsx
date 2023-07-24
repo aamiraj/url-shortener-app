@@ -2,8 +2,10 @@ import { Box, Button, Container, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ShortLinkInput from "./ShortLinkInput";
 import copy from "copy-to-clipboard";
+import shorten from "../../utils/fetchShortUrl";
 
 const MiddleBox = () => {
+  const [url, setUrl] = useState("");
   const [copied, setCopied] = useState(false);
   const [urlCopy, setUrlCopy] = useState("short/link/example");
 
@@ -16,9 +18,15 @@ const MiddleBox = () => {
     setUrlCopy(event.target.value);
   };
 
+  const handleGenerate = async() => {
+    const short = await shorten(url, null);
+    setUrlCopy(`http://localhost:5000/${short}`)
+  };
+
   useEffect(() => {
     setTimeout(() => setCopied(false), 3000);
   });
+
   return (
     <Container
       maxWidth="xl"
@@ -53,6 +61,9 @@ const MiddleBox = () => {
           }}
         />
         <TextField
+          onChange={(
+            event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+          ) => setUrl(event.target.value)}
           id="outlined-basic1"
           variant="outlined"
           placeholder="Enter or copy a link"
@@ -62,7 +73,11 @@ const MiddleBox = () => {
           autoFocus
           required
         />
-        <Button variant="contained" sx={{ color: "#fff" }}>
+        <Button
+          onClick={handleGenerate}
+          variant="contained"
+          sx={{ color: "#fff" }}
+        >
           Generate
         </Button>
         <ShortLinkInput

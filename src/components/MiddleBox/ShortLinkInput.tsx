@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
+import { useLocation } from "react-router-dom";
 
 interface AppProps {
   copied: boolean;
@@ -22,6 +23,8 @@ const ShortLinkInput = ({
   urlCopy,
   handleChangeCopyUrl,
 }: AppProps) => {
+  const { pathname } = useLocation();
+
   return (
     <>
       <FormControl
@@ -34,6 +37,7 @@ const ShortLinkInput = ({
           Your short is link here
         </InputLabel>
         <OutlinedInput
+          readOnly={!(pathname === "/editurl")}
           id="outlined-basic2"
           type="text"
           label="Your short link here"

@@ -1,7 +1,12 @@
 import React from "react";
+import MiddleBox from "../components/MiddleBox/MiddleBox";
 
 const EditUrl = () => {
-  return <div>This is Edit page</div>;
+  return (
+    <>
+      <MiddleBox />
+    </>
+  );
 };
 
 export default EditUrl;
