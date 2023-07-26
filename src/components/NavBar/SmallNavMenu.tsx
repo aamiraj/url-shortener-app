@@ -5,12 +5,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import { UserContext } from "../../contexts/UserProvider";
+import { useNavigate } from "react-router-dom";
 
 const SmallNavMenu = () => {
   const { signInWithGoogle }: any = React.useContext(UserContext);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
+  const navigate = useNavigate();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -18,7 +20,9 @@ const SmallNavMenu = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const handleOnClick = () => {};
+  const handleOnClick = () => {
+    navigate("/sign-in");
+  };
   return (
     <>
       <IconButton
