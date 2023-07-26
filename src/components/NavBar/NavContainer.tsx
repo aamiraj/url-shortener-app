@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import Logo from "./Logo";
 import ProfileMenu from "./ProfileMenu";
 import LargeNavMenu from "./LargeNavMenu";
 import SmallNavMenu from "./SmallNavMenu";
+import { UserContext } from "../../contexts/UserProvider";
 
 interface Display {
-  user: boolean;
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
   xs: string;
   md: string;
   gap: string;
 }
-const NavContainer = ({ user, setUser, xs, md, gap }: Display) => {
+const NavContainer = ({xs, md, gap }: Display) => {
+  const {user}:any = useContext(UserContext)
   return (
     <>
       <Box
@@ -24,12 +24,12 @@ const NavContainer = ({ user, setUser, xs, md, gap }: Display) => {
           gap: gap,
         }}
       >
-        {user ? (
-          <ProfileMenu setUser={setUser} />
+        {user?.email ? (
+          <ProfileMenu />
         ) : xs === "flex" ? (
-          <SmallNavMenu setUser={setUser} />
+          <SmallNavMenu />
         ) : (
-          <LargeNavMenu setUser={setUser} />
+          <LargeNavMenu />
         )}
         <Logo xs={xs} md={md} />
       </Box>

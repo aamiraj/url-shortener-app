@@ -4,11 +4,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import { UserContext } from "../../contexts/UserProvider";
 
-interface Properties {
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const SmallNavMenu = ({ setUser }: Properties) => {
+const SmallNavMenu = () => {
+  const { signInWithGoogle }: any = React.useContext(UserContext);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -19,9 +18,7 @@ const SmallNavMenu = ({ setUser }: Properties) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const handleOnClick = () => {
-    setUser(true);
-  };
+  const handleOnClick = () => {};
   return (
     <>
       <IconButton
@@ -54,7 +51,11 @@ const SmallNavMenu = ({ setUser }: Properties) => {
         }}
       >
         <MenuItem onClick={handleCloseNavMenu}>
-          <Typography color="primary" textAlign="center">
+          <Typography
+            onClick={() => signInWithGoogle()}
+            color="primary"
+            textAlign="center"
+          >
             Sign In With Google
           </Typography>
         </MenuItem>

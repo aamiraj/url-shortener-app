@@ -1,14 +1,12 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { UserContext } from "../../contexts/UserProvider";
 
-interface Properties {
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const LargeNavMenu = ({ setUser }: Properties) => {
-  const handleOnClick = () => {
-    setUser(true);
-  };
+const LargeNavMenu = () => {
+  const { signInWithGoogle }: any = React.useContext(UserContext);
+
+  const handleOnClick = () => {};
   return (
     <>
       <Box
@@ -20,6 +18,7 @@ const LargeNavMenu = ({ setUser }: Properties) => {
         }}
       >
         <Button
+          onClick={() => signInWithGoogle()}
           variant="contained"
           sx={{ my: 2, color: "white", display: "block" }}
         >

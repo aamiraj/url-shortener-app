@@ -6,12 +6,10 @@ import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
+import { UserContext } from "../../contexts/UserProvider";
 
-interface AppProps {
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const ProfileMenu = ({ setUser }: AppProps) => {
+const ProfileMenu = () => {
+  const { signOutFromApp }: any = React.useContext(UserContext);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -24,7 +22,7 @@ const ProfileMenu = ({ setUser }: AppProps) => {
   };
 
   const handleOnClick = () => {
-    setUser(false);
+    signOutFromApp();
   };
   return (
     <>
