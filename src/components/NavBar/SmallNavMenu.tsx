@@ -6,7 +6,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
-const SmallNavMenu = () => {
+const SmallNavMenu = ({ value }: any) => {
+  const { signInWithGoogle }: any = value;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -54,7 +55,7 @@ const SmallNavMenu = () => {
       >
         <MenuItem onClick={handleCloseNavMenu}>
           <Typography
-            onClick={() => console.log("google sign in ...")}
+            onClick={() => signInWithGoogle()}
             color="primary"
             textAlign="center"
           >

@@ -1,8 +1,10 @@
+import React from 'react'
 import Box from "@mui/material/Box";
 import Logo from "./Logo";
 import ProfileMenu from "./ProfileMenu";
 import LargeNavMenu from "./LargeNavMenu";
 import SmallNavMenu from "./SmallNavMenu";
+import { UserContext } from "../../contexts/UserProvider";
 
 type AppProps = {
   xs: string;
@@ -10,7 +12,7 @@ type AppProps = {
   gap: string;
 };
 const NavContainer = ({ xs, md, gap }: AppProps) => {
-  const user = false;
+  const value = React.useContext(UserContext);
   return (
     <>
       <Box
@@ -22,10 +24,10 @@ const NavContainer = ({ xs, md, gap }: AppProps) => {
           gap: gap,
         }}
       >
-        {user ? (
-          <ProfileMenu />
+        {value?.user?.email ? (
+          <ProfileMenu value={value} />
         ) : xs === "flex" ? (
-          <SmallNavMenu />
+          <SmallNavMenu value={value} />
         ) : (
           <LargeNavMenu />
         )}

@@ -24,6 +24,9 @@ const MiddleBox = ({ children }: AppProps) => {
           alignItems: "center",
           flexDirection: "column",
           gap: "2rem",
+          backgroundColor: "#fff",
+          border: "1px solid #d0d0d0" ,
+          borderRadius: "8px"
         }}
       >
         {children}
