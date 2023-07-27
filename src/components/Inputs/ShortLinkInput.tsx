@@ -10,12 +10,12 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 import { useLocation } from "react-router-dom";
 
-interface AppProps {
+type AppProps = {
   copied: boolean;
   handleClickCopyUrl: () => void;
   urlCopy: string;
   handleChangeCopyUrl: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
 const ShortLinkInput = ({
   copied,
@@ -37,7 +37,7 @@ const ShortLinkInput = ({
           Your short is link here
         </InputLabel>
         <OutlinedInput
-          readOnly={!(pathname === "/editurl")}
+          readOnly={!(pathname === "/edit-url")}
           id="outlined-basic2"
           type="text"
           label="Your short link here"

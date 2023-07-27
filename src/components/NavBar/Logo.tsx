@@ -1,11 +1,11 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 
-interface Display {
+type AppProps = {
   xs: string | undefined;
   md: string | undefined;
 }
-const Logo = ({ xs, md }: Display) => {
+const Logo = ({ xs, md }: AppProps) => {
   return (
     <>
       <Typography

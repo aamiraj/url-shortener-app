@@ -1,10 +1,10 @@
 import React from "react";
-import MiddleBox from "../components/MiddleBox/MiddleBox";
+import Home from "./Home";
 
 const EditUrl = () => {
   return (
     <>
-      <MiddleBox />
+      <Home />
     </>
   );
 };

@@ -1,18 +1,16 @@
-import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import Logo from "./Logo";
 import ProfileMenu from "./ProfileMenu";
 import LargeNavMenu from "./LargeNavMenu";
 import SmallNavMenu from "./SmallNavMenu";
-import { UserContext } from "../../contexts/UserProvider";
 
-interface Display {
+type AppProps = {
   xs: string;
   md: string;
   gap: string;
-}
-const NavContainer = ({xs, md, gap }: Display) => {
-  const {user}:any = useContext(UserContext)
+};
+const NavContainer = ({ xs, md, gap }: AppProps) => {
+  const user = false;
   return (
     <>
       <Box
@@ -24,7 +22,7 @@ const NavContainer = ({xs, md, gap }: Display) => {
           gap: gap,
         }}
       >
-        {user?.email ? (
+        {user ? (
           <ProfileMenu />
         ) : xs === "flex" ? (
           <SmallNavMenu />

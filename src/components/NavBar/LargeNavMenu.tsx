@@ -1,11 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { UserContext } from "../../contexts/UserProvider";
 import { useNavigate } from "react-router-dom";
 
 const LargeNavMenu = () => {
-  const { signInWithGoogle }: any = React.useContext(UserContext);
   const navigate = useNavigate()
 
   const handleOnClick = () => {
@@ -22,7 +20,7 @@ const LargeNavMenu = () => {
         }}
       >
         <Button
-          onClick={() => signInWithGoogle()}
+          onClick={() => console.log("sign in with google...")}
           variant="contained"
           sx={{ my: 2, color: "white", display: "block" }}
         >

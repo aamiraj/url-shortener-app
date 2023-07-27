@@ -1,11 +1,14 @@
-import React from "react";
-import Router from "./router/router";
+import { RouterProvider } from "react-router-dom";
 import { Container } from "@mui/material";
+import router from "./router/router";
+import UserProvider from "./contexts/UserProvider";
 
 function App() {
   return (
-    <Container sx={{ maxWidth: "1536px" }}>
-      <Router />
+    <Container maxWidth="xl">
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
     </Container>
   );
 }

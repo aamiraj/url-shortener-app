@@ -6,10 +6,8 @@ import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
-import { UserContext } from "../../contexts/UserProvider";
 
 const ProfileMenu = () => {
-  const { signOutFromApp }: any = React.useContext(UserContext);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -22,7 +20,7 @@ const ProfileMenu = () => {
   };
 
   const handleOnClick = () => {
-    signOutFromApp();
+    console.log("sign out");
   };
   return (
     <>

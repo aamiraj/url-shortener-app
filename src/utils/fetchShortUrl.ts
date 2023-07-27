@@ -12,7 +12,3 @@ const shorten = async (url: string, email: string | null) => {
 };
 
 export default shorten;
-// let shortUrl = shorten(
-//   "https://www.youtube.com/channel/UCHK4HD0ltu1-I212icLPt3g"
-// );
-// console.log(shortUrl);

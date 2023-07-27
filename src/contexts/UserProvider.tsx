@@ -1,4 +1,3 @@
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import React, { createContext } from "react";
 import app from "../firebase/firebase.init";
 import {
@@ -11,37 +10,39 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 
-interface AppProps {
-  children: ReactJSXElement;
-}
+type AppProps = {
+  children: React.ReactNode;
+};
 
-interface Value {
-  user: object;
-  error: object;
+type Value = {
+  user: any;
+  error: any;
   signInWithGoogle: () => void;
   signOutFromApp: () => void;
   signInWithEmail: (email: string, password: string) => void;
   registerUser: (email: string, password: string) => void;
-}
+};
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-export const UserContext = createContext({});
+export const UserContext = createContext<Value | null>(null);
 
 const UserProvider = ({ children }: AppProps) => {
-  const [user, setUser] = React.useState<any>();
-  const [error, setError] = React.useState<any>();
+  const [user, setUser] = React.useState<any>(null);
+  const [error, setError] = React.useState<any>(null);
 
-  // React.useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       setUser(user);
-  //     } else {
-  //       setUser({});
-  //     }
-  //   });
-  // }, [user]);
+  React.useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unSubscribe();
+  }, []);
 
   const registerUser = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
