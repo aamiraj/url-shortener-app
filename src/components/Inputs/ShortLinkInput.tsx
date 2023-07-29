@@ -30,6 +30,7 @@ const ShortLinkInput = ({
       <FormControl
         sx={{
           minWidth: "75%",
+          margin: "2rem 0"
         }}
         variant="outlined"
       >

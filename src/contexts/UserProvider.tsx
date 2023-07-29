@@ -17,10 +17,10 @@ type AppProps = {
 type Value = {
   user: any;
   error: any;
-  signInWithGoogle: () => void;
+  signInWithGoogle: () => Promise<boolean>;
   signOutFromApp: () => void;
-  signInWithEmail: (email: string, password: string) => void;
-  registerUser: (email: string, password: string) => void;
+  signInWithEmail: (email: string, password: string) => Promise<boolean>;
+  registerUser: (email: string, password: string) => Promise<boolean>;
 };
 
 const auth = getAuth(app);
@@ -44,38 +44,52 @@ const UserProvider = ({ children }: AppProps) => {
     return () => unSubscribe();
   }, []);
 
-  const registerUser = (email: string, password: string) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
-      })
-      .catch((error) => {
-        setError(error);
-      });
+  const registerUser = async (email: string, password: string) => {
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setUser(userCredentials?.user);
+      return true;
+    } catch (error) {
+      setError(error);
+      return false;
+    }
   };
 
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => setUser(result.user))
-      .catch((error) => setError(error));
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user);
+      return true;
+    } catch (error) {
+      setError(error);
+      return false;
+    }
   };
 
-  const signInWithEmail = (email: string, password: string) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
-      })
-      .catch((error) => {
-        setError(error);
-      });
+  const signInWithEmail = async (email: string, password: string) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      setUser(user);
+      return true;
+    } catch (error) {
+      setError(error);
+      return false;
+    }
   };
 
   const signOutFromApp = () => {
     signOut(auth)
       .then(() => {
-        setUser({});
+        setUser(null);
       })
       .catch((error) => {
         setError(error);

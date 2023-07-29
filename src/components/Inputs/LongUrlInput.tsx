@@ -26,6 +26,7 @@ const LongUrlInput = ({ setUrlCopy }: AppProps) => {
         placeholder="Enter or copy a link"
         sx={{
           minWidth: "75%",
+          margin: "2rem 0"
         }}
         autoFocus
         required

@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Paper, Container } from "@mui/material";
 import React from "react";
 
 type AppProps = { children: React.ReactNode };
@@ -15,22 +15,21 @@ const MiddleBox = ({ children }: AppProps) => {
         alignItems: "center",
       }}
     >
-      <Box
+      <Paper
         sx={{
           minWidth: { xs: "100%", sm: 580 },
-          height: { xs: "100%", sm: 363 },
+          height: { xs: "100%", sm: 450 },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          gap: "2rem",
           backgroundColor: "#fff",
           border: "1px solid #d0d0d0" ,
           borderRadius: "8px"
         }}
       >
         {children}
-      </Box>
+      </Paper>
     </Container>
   );
 };
