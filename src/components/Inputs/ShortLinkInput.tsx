@@ -8,29 +8,39 @@ import {
 } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
-import { useLocation } from "react-router-dom";
+import copy from "copy-to-clipboard";
 
 type AppProps = {
+  name: string;
+  shortLink: string;
   copied: boolean;
-  handleClickCopyUrl: () => void;
-  urlCopy: string;
-  handleChangeCopyUrl: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  readOnly: boolean;
+  setCopied: React.Dispatch<React.SetStateAction<boolean>>;
+  setshortLink: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const ShortLinkInput = ({
+  name,
+  shortLink,
   copied,
-  handleClickCopyUrl,
-  urlCopy,
-  handleChangeCopyUrl,
+  readOnly,
+  setCopied,
+  setshortLink,
 }: AppProps) => {
-  const { pathname } = useLocation();
+  const handleClickCopyUrl = () => {
+    setCopied(true);
+    copy(shortLink);
+  };
 
+  const handleChangeCopyUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setshortLink(event.target.value);
+  };
   return (
     <>
       <FormControl
         sx={{
           minWidth: "75%",
-          margin: "2rem 0"
+          margin: "2rem 0",
         }}
         variant="outlined"
       >
@@ -38,12 +48,13 @@ const ShortLinkInput = ({
           Your short is link here
         </InputLabel>
         <OutlinedInput
-          readOnly={!(pathname === "/edit-url")}
+          readOnly={readOnly}
           id="outlined-basic2"
           type="text"
           label="Your short link here"
           onChange={handleChangeCopyUrl}
-          value={urlCopy}
+          value={shortLink}
+          name={name}
           endAdornment={
             <InputAdornment position="end">
               <IconButton

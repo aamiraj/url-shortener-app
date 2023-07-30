@@ -2,34 +2,70 @@ import React from "react";
 import LongUrlInput from "../components/Inputs/LongUrlInput";
 import ShortLinkInput from "../components/Inputs/ShortLinkInput";
 import MiddleBox from "../components/MiddleBox/MiddleBox";
-import copy from "copy-to-clipboard";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
+import saveLocalStorage from "../utils/saveLocalStorage";
 
 const Home = () => {
+  const [longUrl, setlongUrl] = React.useState("");
+  const [shortLink, setshortLink] = React.useState("short/link/example");
+  const [readOnly, setReadOnly] = React.useState(true);
   const [copied, setCopied] = React.useState(false);
-  const [urlCopy, setUrlCopy] = React.useState("short/link/example");
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setTimeout(() => setCopied(false), 3000);
   });
 
-  const handleClickCopyUrl = () => {
-    setCopied(true);
-    copy(urlCopy);
+  const handleClickSave = () => {
+    const data = { full: longUrl, short: shortLink };
+    saveLocalStorage(data);
   };
 
-  const handleChangeCopyUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUrlCopy(event.target.value);
-  };
   return (
     <>
       <MiddleBox>
-        <LongUrlInput setUrlCopy={setUrlCopy} />
-        <ShortLinkInput
-          copied={copied}
-          handleClickCopyUrl={handleClickCopyUrl}
-          urlCopy={urlCopy}
-          handleChangeCopyUrl={handleChangeCopyUrl}
+        <LongUrlInput
+          name="longUrl"
+          longUrl={longUrl}
+          setshortLink={setshortLink}
+          setlongUrl={setlongUrl}
         />
+        <ShortLinkInput
+          name="shortLink"
+          shortLink={shortLink}
+          copied={copied}
+          readOnly={readOnly}
+          setCopied={setCopied}
+          setshortLink={setshortLink}
+        />
+        <Box>
+          <Button
+            onClick={handleClickSave}
+            type="button"
+            variant="contained"
+            color="primary"
+          >
+            Save
+          </Button>
+          <Button
+            type="button"
+            variant="text"
+            color="primary"
+            onClick={() => setReadOnly((prev) => !prev)}
+          >
+            {readOnly ? "Edit" : "ReadOnly"}
+          </Button>
+          <Button
+            type="button"
+            variant="text"
+            color="primary"
+            onClick={() => navigate("/list-url")}
+          >
+            Your Links
+          </Button>
+        </Box>
       </MiddleBox>
     </>
   );

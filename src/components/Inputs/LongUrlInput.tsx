@@ -3,30 +3,38 @@ import { Button, TextField } from "@mui/material";
 import shorten from "../../utils/fetchShortUrl";
 
 type AppProps = {
-  setUrlCopy: React.Dispatch<React.SetStateAction<string>>;
+  name: string;
+  longUrl: string;
+  setlongUrl: React.Dispatch<React.SetStateAction<string>>;
+  setshortLink: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const LongUrlInput = ({ setUrlCopy }: AppProps) => {
-  const [url, setUrl] = React.useState("");
-
+const LongUrlInput = ({
+  name,
+  longUrl,
+  setlongUrl,
+  setshortLink,
+}: AppProps) => {
   const handleGenerate = async () => {
-    const short = await shorten(url, null);
-    setUrlCopy(process.env.REACT_APP_SERVER_DEV + "/" + short);
+    const short = await shorten(longUrl, null);
+    setshortLink(process.env.REACT_APP_SERVER_DEV + "/" + short);
   };
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setUrl(event.target.value);
+  ) => setlongUrl(event.target.value);
   return (
     <>
       <TextField
+        value={longUrl}
+        name={name}
         onChange={handleChange}
         id="outlined-basic1"
         variant="outlined"
         placeholder="Enter or copy a link"
         sx={{
           minWidth: "75%",
-          margin: "2rem 0"
+          margin: "2rem 0",
         }}
         autoFocus
         required
@@ -35,6 +43,7 @@ const LongUrlInput = ({ setUrlCopy }: AppProps) => {
         onClick={handleGenerate}
         variant="contained"
         sx={{ color: "#fff" }}
+        type="button"
       >
         Generate
       </Button>
