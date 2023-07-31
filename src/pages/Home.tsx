@@ -6,12 +6,25 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import saveLocalStorage from "../utils/saveLocalStorage";
+import { key } from "../utils/key";
+import Toast from "../components/Toast/Toast";
 
-const Home = () => {
-  const [longUrl, setlongUrl] = React.useState("");
-  const [shortLink, setshortLink] = React.useState("short/link/example");
-  const [readOnly, setReadOnly] = React.useState(true);
+type AppProps = {
+  long: string | undefined;
+  short: string | undefined;
+  read: boolean | undefined;
+};
+
+const Home = ({
+  long = "",
+  short = "short/link/example",
+  read = true,
+}: AppProps) => {
+  const [longUrl, setlongUrl] = React.useState(long);
+  const [shortLink, setshortLink] = React.useState(short);
+  const [readOnly, setReadOnly] = React.useState(read);
   const [copied, setCopied] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -19,12 +32,16 @@ const Home = () => {
   });
 
   const handleClickSave = () => {
-    const data = { full: longUrl, short: shortLink };
-    saveLocalStorage(data);
+    if (longUrl.length > 0 && shortLink.length > 0) {
+      const data = { full: longUrl, short: shortLink };
+      saveLocalStorage(key, data);
+      setOpen(true);
+    }
   };
 
   return (
     <>
+      <Toast open={open} setOpen={setOpen} message="Saved successfully" />
       <MiddleBox>
         <LongUrlInput
           name="longUrl"

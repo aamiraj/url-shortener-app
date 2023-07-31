@@ -13,10 +13,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home long="" short="short/link/example" read={true} />,
       },
       {
-        path: "/edit-url",
+        path: "/edit-url/:id",
         element: <EditUrl />,
       },
       {
